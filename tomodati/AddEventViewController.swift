@@ -12,7 +12,11 @@ class AddEventViewController: UIViewController {
     
     @IBOutlet  var titleTextField: UITextField!
     @IBOutlet var datePicker: UIDatePicker!
-    @IBOutlet var contentTextView: UITextView!
+    @IBOutlet var contentTextview: UITextView!
+    @IBOutlet var placeTextFiled: UITextField!
+    @IBOutlet var usernameTextFiled1: UITextField!
+    @IBOutlet var usernameTextFiled2: UITextField!
+    
     
     var eventArray = [EventData]()
     
@@ -31,7 +35,7 @@ class AddEventViewController: UIViewController {
     
     
     @IBAction func add(){
-        let eventData = EventData(title: titleTextField.text!, date: datePicker.date,content: contentTextView.text)
+        let eventData = EventData(title: titleTextField.text!, date: datePicker.date,content: contentTextview.text!,place: placeTextFiled.text!,username1: usernameTextFiled1.text!,username2: usernameTextFiled2.text!)
         eventArray.append(eventData)
         if let encoded = try?JSONEncoder().encode(eventArray){UserDefaults.standard.set(encoded,forKey: "Eventarray")}
     }

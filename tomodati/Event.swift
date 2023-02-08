@@ -12,21 +12,8 @@ struct EventData: Codable{
     var title: String
     var date: Date
     var content: String
+    var place: String
+    var username1: String
+    var username2: String
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -8,6 +8,7 @@
 import UIKit
 
 class EventListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:"cell",for:indexPath)
         let ladel = cell.contentView.viewWithTag(1)as! UILabel
@@ -18,11 +19,10 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
      return 12
     }
+    
     override func viewDidLoad() {
             super.viewDidLoad()
         let alert :UIAlertController  = UIAlertController  (title:"タイトル",message:"保存を完了しました",preferredStyle: .alert)
-        
-        
         
             // Do any additional setup after loading the view.
     }
