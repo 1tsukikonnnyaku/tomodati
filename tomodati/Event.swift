@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct EventData: Codable{
-   
-    var title: String
+    @DocumentID var id: String?
     var date: Date
-    var content: String
-    var place: String
-    var username1: String
-    var username2: String
+    var topic: String
+    var spot: String
+    var user1: String
+    var user2: String
 }
+
 

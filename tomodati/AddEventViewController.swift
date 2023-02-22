@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
+
 
 class AddEventViewController: UIViewController {
     
+    let db = Firestore.firestore()
     
-    @IBOutlet  var titleTextField: UITextField!
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var contentTextview: UITextView!
     @IBOutlet var placeTextFiled: UITextField!
@@ -24,19 +27,21 @@ class AddEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if let savedData = UserDefaults.standard.data(forKey: "Eventarray"), let decoded = try? JSONDecoder().decode([EventData].self, from: savedData) {
-          eventArray = decoded
-            print(eventArray)
-//            eventArray[0].title
-//            titleTextField.text = decoded[0].title
-//            datePicker.date = decoded[0].date
-        }
+        
     }
     
     
     @IBAction func add(){
-        let eventData = EventData(title: titleTextField.text!, date: datePicker.date,content: contentTextview.text!,place: placeTextFiled.text!,username1: usernameTextFiled1.text!,username2: usernameTextFiled2.text!)
+        let eventData = EventData(date: datePicker.date,topic: contentTextview.text!,spot: placeTextFiled.text!,user1: usernameTextFiled1.text!,user2: usernameTextFiled2.text!)
+       
+        do{
+            try db.collection("events").document().setData(from: eventData)
+        } catch let error {
+            print("Error writing eventDate to Firestore: \(error)")
+        }
+        
         eventArray.append(eventData)
+        
         if let encoded = try?JSONEncoder().encode(eventArray){UserDefaults.standard.set(encoded,forKey: "Eventarray")}
     }
     
